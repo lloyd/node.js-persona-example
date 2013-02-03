@@ -1,0 +1,14 @@
+{
+  "name": "easypeasy",
+  "description": "The Simplest Possible Node.JS / Persona Implementation",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "request": "*",
+    "express": "*",
+    "ejs": "*"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}

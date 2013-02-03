@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+<% if (email) { %>
+    You're logged in as <%= email %> (<a href="#" id="logout">logout</a>)
+<% } else { %>
+    <a id="login" href="#">Log in with your email</a>
+<% }; %>
+</body>
+<script src="https://login.persona.org/include.js"></script>
+<script src="js/reqwest.min.js"></script>
+<script>
+
+  navigator.id.watch({
+    loggedInUser: <%- JSON.stringify(email) %>,
+    onlogin: function(assertion) {
+      reqwest({
+        url: '/auth',
+        method: 'post',
+        type: 'json',
+        data: { assertion: assertion },
+        success: function (resp) {
+          document.location.reload();
+        }
+      })
+    },
+    onlogout: function() {
+      document.location = '/logout';
+    }
+  });
+
+<% if (email) { %>
+  var logoutElem = document.querySelector("#logout");
+  logoutElem.onclick = function() {
+    navigator.id.logout();
+  };
+<% } else { %>
+  var loginElem = document.querySelector("#login");
+  loginElem.onclick = function() {
+    navigator.id.request();
+  };
+<% } %>
+
+</script>
+</html>
