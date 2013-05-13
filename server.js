@@ -21,7 +21,7 @@ app.get('/logout', function(req, res) {
 
 app.post('/auth', function(req, res) {
   request.post({
-    url: 'https://login.persona.org/verify',
+    url: 'https://verifier.login.persona.org/verify',
     json: {
       assertion: req.body.assertion,
       audience: "http://127.0.0.1:3000"
