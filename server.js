@@ -3,9 +3,9 @@ var express = require('express'),
 
 var app = express();
 
-app.use(express.cookieParser())
-   .use(express.bodyParser())
-   .use(express.cookieSession({
+app.use(require('cookie-parser')())
+   .use(require('body-parser').urlencoded({ extended: true }))
+   .use(require('cookie-session')({
      secret: "meh"
    }))
    .use(express.static(__dirname + '/static'));
